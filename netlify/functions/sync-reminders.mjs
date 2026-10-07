@@ -30,7 +30,7 @@ export default async (req) => {
     syncedAt: Date.now()
   };
 
-  const store = getStore({ name: "nudge-push", consistency: "strong" });
+  const store = getStore("nudge-push");
   await store.setJSON("reminder-state", payload);
   return reply({ ok: true, count: payload.items.length });
 };
