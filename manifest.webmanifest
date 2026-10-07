@@ -1,0 +1,10 @@
+{
+  "name": "Nudge",
+  "short_name": "Nudge",
+  "description": "Private routines and reminders",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#110e18",
+  "theme_color": "#14111c"
+}
