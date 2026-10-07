@@ -1,6 +1,6 @@
 import { getStore } from "@netlify/blobs";
 
-const PUBLIC_KEY = "BI-mI_3I8SVNeF_L8jRx4ARkh_Yc-67XXwtiLQuKjlD-BQjrGibj65wjpFFaHFxbDQ55xmOZKE12teHEPmIrHQ0";
+const PUBLIC_KEY = "BPQiYZIdVtVxhMOMWTerRS3SJAr3_5PSUw7cJ4qc_4WnMNOe4zkU1zfWBCnxx9dVpjJYVG03oHx2vWjRqQ3vJ74";
 
 function reply(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -22,7 +22,7 @@ export default async (req) => {
     return reply({ error: "Invalid push subscription" }, 400);
   }
 
-  const store = getStore({ name: "nudge-push", consistency: "strong" });
+  const store = getStore("nudge-push");
   await store.setJSON("primary-subscription", sub);
   return reply({ ok: true });
 };
