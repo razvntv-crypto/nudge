@@ -23,7 +23,7 @@ export default async (req) => {
   const sub = await store.get("primary-subscription", { type: "json", consistency: "strong" });
   if (!sub) return reply({ error: "No device subscribed yet" }, 409);
 
-  webpush.setVapidDetails("mailto:nudge@localhost.invalid", PUBLIC_KEY, privateKey);
+  webpush.setVapidDetails("https://gilded-syrniki-da98ed.netlify.app", PUBLIC_KEY, privateKey);
   try {
     await webpush.sendNotification(sub, JSON.stringify({
       title: "Nudge test ✓",
