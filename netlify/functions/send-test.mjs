@@ -1,7 +1,7 @@
 import { getStore } from "@netlify/blobs";
 import webpush from "web-push";
 
-const PUBLIC_KEY = "BI-mI_3I8SVNeF_L8jRx4ARkh_Yc-67XXwtiLQuKjlD-BQjrGibj65wjpFFaHFxbDQ55xmOZKE12teHEPmIrHQ0";
+const PUBLIC_KEY = "BPQiYZIdVtVxhMOMWTerRS3SJAr3_5PSUw7cJ4qc_4WnMNOe4zkU1zfWBCnxx9dVpjJYVG03oHx2vWjRqQ3vJ74";
 
 function reply(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -19,7 +19,7 @@ export default async (req) => {
   const privateKey = process.env.VAPID_PRIVATE_KEY;
   if (!privateKey) return reply({ error: "VAPID_PRIVATE_KEY is not configured" }, 500);
 
-  const store = getStore({ name: "nudge-push", consistency: "strong" });
+  const store = getStore("nudge-push");
   const sub = await store.get("primary-subscription", { type: "json", consistency: "strong" });
   if (!sub) return reply({ error: "No device subscribed yet" }, 409);
 

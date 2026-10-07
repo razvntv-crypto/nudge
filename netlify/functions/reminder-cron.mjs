@@ -1,7 +1,7 @@
 import { getStore } from "@netlify/blobs";
 import webpush from "web-push";
 
-const PUBLIC_KEY = "BI-mI_3I8SVNeF_L8jRx4ARkh_Yc-67XXwtiLQuKjlD-BQjrGibj65wjpFFaHFxbDQ55xmOZKE12teHEPmIrHQ0";
+const PUBLIC_KEY = "BPQiYZIdVtVxhMOMWTerRS3SJAr3_5PSUw7cJ4qc_4WnMNOe4zkU1zfWBCnxx9dVpjJYVG03oHx2vWjRqQ3vJ74";
 
 function localParts(timeZone) {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -51,7 +51,7 @@ function dueOn(i, d, weekday) {
 export default async () => {
   const privateKey = process.env.VAPID_PRIVATE_KEY;
   if (!privateKey) return;
-  const store = getStore({ name: "nudge-push", consistency: "strong" });
+  const store = getStore("nudge-push");
   const [state, sub] = await Promise.all([
     store.get("reminder-state", { type:"json", consistency:"strong" }),
     store.get("primary-subscription", { type:"json", consistency:"strong" })
