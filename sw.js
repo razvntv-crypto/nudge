@@ -2,7 +2,7 @@
    GitHub Actions sends an empty-ish push ({slot}) at 8:00, 15:00 and 20:00.
    The counts are computed here, on the phone, from the tasks the app mirrors into IndexedDB,
    so no task data ever leaves the device. */
-const CACHE = "remindery-v5";
+const CACHE = "remindery-v6";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
@@ -82,7 +82,7 @@ function summary(S, slot) {
   else if (slot === "morning") body = plural(total, "task", "tasks") + " for today";
   else if (!left) body = "All done for today";
   else body = plural(left, "task", "tasks") + " left for today";
-  return { title: "Remindery", body, left };
+  return { title: "", body, left };  // iOS already shows "from Remindery" above the text
 }
 async function showSummary(slot) {
   const S = await readState();
