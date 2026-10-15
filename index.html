@@ -13,6 +13,9 @@
 <meta name="apple-mobile-web-app-title" content="Remindery">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
+/* hide scroll bars everywhere */
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar{display:none;width:0;height:0;background:transparent}
+
 :root{--bg:#f6f2ec;--card:#fffdf9;--card2:#f1ece5;--ink:#1d1a24;--mute:#8a8494;--line:#e8e1d6;--acc:#6b45ff;--acc2:#a28bff;--accink:#fff;--bad:#e0443a;--warn:#de8d16;--ok:#1f9d6a;--blue:#2f8fe0;--field:#f0ebe3;--shadow:0 1px 2px rgba(40,25,10,.05),0 8px 24px rgba(40,25,10,.06)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#110e18;--card:#1b1724;--card2:#211c2d;--ink:#f4f0fb;--mute:#9b94aa;--line:#30293d;--acc:#a28bff;--acc2:#7f64ff;--accink:#171126;--bad:#ff7a70;--warn:#ffb34d;--ok:#4ad6a0;--blue:#63adff;--field:#17131f;--shadow:0 1px 2px rgba(0,0,0,.28),0 8px 28px rgba(0,0,0,.12)}}
 :root[data-theme="dark"]{--bg:#110e18;--card:#1b1724;--card2:#211c2d;--ink:#f4f0fb;--mute:#9b94aa;--line:#30293d;--acc:#a28bff;--acc2:#7f64ff;--accink:#171126;--bad:#ff7a70;--warn:#ffb34d;--ok:#4ad6a0;--blue:#63adff;--field:#17131f;--shadow:0 1px 2px rgba(0,0,0,.28),0 8px 28px rgba(0,0,0,.12)}
@@ -72,7 +75,7 @@ function diffDays(a,b){return Math.round((parseDate(b)-parseDate(a))/864e5)}
 function monthDiff(a,b){var x=parseDate(a),y=parseDate(b);return(y.getFullYear()-x.getFullYear())*12+(y.getMonth()-x.getMonth())}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-var VAPID_PUBLIC='BKJWIncamjV52k5sjfWTkWUMrjipZvwXlHxnYX3VBg44CXgMCwGAd-u0MjjKfstsbQ3_w-Rh-wmMB67sW15lMdY',APP_VERSION='2.6';
+var VAPID_PUBLIC='BKJWIncamjV52k5sjfWTkWUMrjipZvwXlHxnYX3VBg44CXgMCwGAd-u0MjjKfstsbQ3_w-Rh-wmMB67sW15lMdY',APP_VERSION='2.7';
 function save(){try{localStorage.setItem('nudge_v2',JSON.stringify(S))}catch(e){toast('Could not save on this device')}mirror();updateBadge();}
 /* the service worker reads this copy to count today's tasks when a notification arrives */
 function mirror(){try{var rq=indexedDB.open('remindery',1);rq.onupgradeneeded=function(){rq.result.createObjectStore('kv')};rq.onsuccess=function(){try{rq.result.transaction('kv','readwrite').objectStore('kv').put(JSON.parse(JSON.stringify(S)),'state')}catch(e){}}}catch(e){}}
