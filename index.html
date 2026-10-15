@@ -52,6 +52,9 @@ button,.item,.day,.tab,.smallBtn,.iconBtn{transition:transform .14s ease,opacity
 button:active{transform:scale(.97)}
 @media(prefers-reduced-motion:reduce){#app.view-in,.sheet,.sheet.sheet-out,.check.pop,.item.fresh,.toast{animation:none!important}button,.item,.day,.tab,.smallBtn,.iconBtn{transition:none!important}}
 @media(max-width:430px){.hd h1{font-size:31px}.week{gap:4px}.day{border-radius:14px}.day .dn{font-size:14px}.heroNum{font-size:28px}}
+html,body{overscroll-behavior:none}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
 </style>
 </head>
 <body>
