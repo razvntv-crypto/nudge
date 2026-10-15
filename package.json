@@ -1,10 +1,9 @@
 {
-  "name": "nudge",
+  "name": "remindery",
   "private": true,
-  "version": "2.1.0",
+  "version": "2.2.0",
   "type": "module",
   "dependencies": {
-    "@netlify/blobs": "^11.1.1",
     "web-push": "3.6.7"
   }
 }
