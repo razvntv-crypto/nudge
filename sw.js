@@ -2,7 +2,7 @@
    GitHub Actions sends an empty-ish push ({slot}) at 8:00, 15:00 and 20:00.
    The counts are computed here, on the phone, from the tasks the app mirrors into IndexedDB,
    so no task data ever leaves the device. */
-const CACHE = "remindery-v4";
+const CACHE = "remindery-v5";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
@@ -76,14 +76,13 @@ function listBody(arr) {
   return names.join(" · ") + (arr.length > 4 ? " · +" + (arr.length - 4) + " more" : "");
 }
 function summary(S, slot) {
-  const t = todayItems(S), total = t.all.length, left = t.left.length, done = total - left;
-  if (slot === "morning") {
-    if (!total) return { title: "Nothing scheduled today", body: "A free day. Add something if you need to.", left };
-    return { title: plural(total, "task", "tasks") + " for today", body: listBody(t.left.length ? t.left : t.all), left };
-  }
-  if (!total) return { title: "Nothing scheduled today", body: "No tasks were planned for today.", left };
-  if (!left) return { title: "All done for today", body: done + " of " + total + " complete. Nice work.", left };
-  return { title: plural(left, "task", "tasks") + " left", body: (slot === "evening" ? "Still time tonight: " : "") + listBody(t.left), left };
+  const t = todayItems(S), total = t.all.length, left = t.left.length;
+  let body;
+  if (!total) body = "Nothing scheduled for today";
+  else if (slot === "morning") body = plural(total, "task", "tasks") + " for today";
+  else if (!left) body = "All done for today";
+  else body = plural(left, "task", "tasks") + " left for today";
+  return { title: "Remindery", body, left };
 }
 async function showSummary(slot) {
   const S = await readState();

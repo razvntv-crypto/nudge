@@ -72,7 +72,7 @@ function diffDays(a,b){return Math.round((parseDate(b)-parseDate(a))/864e5)}
 function monthDiff(a,b){var x=parseDate(a),y=parseDate(b);return(y.getFullYear()-x.getFullYear())*12+(y.getMonth()-x.getMonth())}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-var VAPID_PUBLIC='BKJWIncamjV52k5sjfWTkWUMrjipZvwXlHxnYX3VBg44CXgMCwGAd-u0MjjKfstsbQ3_w-Rh-wmMB67sW15lMdY',APP_VERSION='2.3';
+var VAPID_PUBLIC='BKJWIncamjV52k5sjfWTkWUMrjipZvwXlHxnYX3VBg44CXgMCwGAd-u0MjjKfstsbQ3_w-Rh-wmMB67sW15lMdY',APP_VERSION='2.4';
 function save(){try{localStorage.setItem('nudge_v2',JSON.stringify(S))}catch(e){toast('Could not save on this device')}mirror();updateBadge();}
 /* the service worker reads this copy to count today's tasks when a notification arrives */
 function mirror(){try{var rq=indexedDB.open('remindery',1);rq.onupgradeneeded=function(){rq.result.createObjectStore('kv')};rq.onsuccess=function(){try{rq.result.transaction('kv','readwrite').objectStore('kv').put(JSON.parse(JSON.stringify(S)),'state')}catch(e){}}}catch(e){}}
